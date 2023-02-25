@@ -1,19 +1,18 @@
 package com.sheltersolution.volunteers.service;
 
-import com.sheltersolution.volunteers.config.ApplicationConfiguration;
+import com.sheltersolution.volunteers.repository.VolunteerRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
 public class VolunteerService {
 
-    private ApplicationConfiguration applicationConfiguration;
+    private final VolunteerRepository volunteerRepository;
 
-    public String getAppPropertiesName() {
-        String name = applicationConfiguration.getVolunteer().getName();
-        if (name == null) return "empty";
-        return name;
+    public ResponseEntity getAppPropertiesName() {
+        return ResponseEntity.ok(this.volunteerRepository.findAll());
     }
 
 }
