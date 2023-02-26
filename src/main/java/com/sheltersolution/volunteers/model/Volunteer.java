@@ -6,6 +6,8 @@ import com.sheltersolution.volunteers.converters.VolunteerRoleConverter;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -13,11 +15,13 @@ import javax.persistence.*;
 public class Volunteer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
     private String firstName;
     private String lastName;
     @Convert(converter = VolunteerRoleConverter.class)
     private VolunteerRole volunteerRole;
     private VolunteerStatus volunteerStatus;
+    @OneToMany (mappedBy = "id")
+    private List<Adopter> adopters;
 }
